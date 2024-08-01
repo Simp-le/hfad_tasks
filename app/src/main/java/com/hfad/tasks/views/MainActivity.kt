@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        setPaddings(findViewById(R.id.fragment_container_view))
+        setPaddings(findViewById(R.id.nav_host_fragment))
     }
 
     private fun setPaddings(view: View) {

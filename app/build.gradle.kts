@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.androidx.navigation.safe.args.kotlin)
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.google.devtools.ksp)
 }
@@ -54,6 +55,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
+    implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.recyclerview)

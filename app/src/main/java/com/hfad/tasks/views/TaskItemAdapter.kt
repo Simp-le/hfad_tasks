@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.tasks.databinding.TaskItemBinding
 import com.hfad.tasks.model.Task
 
-class TaskItemAdapter : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(TaskDiffItemCallback()) {
+class TaskItemAdapter(private val clickListener: (taskId: Long) -> Unit) : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(TaskDiffItemCallback()) {
     // parent - recycler view. This gets called when a view holder needs to be created
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder =
         TaskItemViewHolder.inflateFrom(parent)
@@ -16,15 +16,18 @@ class TaskItemAdapter : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(Ta
     // This gets called when data needs to be displayed in a view holder
     override fun onBindViewHolder(holder: TaskItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 
 
     // This defined the view holder
     class TaskItemViewHolder(private val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root) {
         // This binds Task object to its layout
-        fun bind(item: Task) {
+        fun bind(item: Task, clickListener: (taskId: Long) -> Unit) {
             binding.task = item
+            binding.root.setOnClickListener {
+                clickListener(item.taskId)
+            }
         }
 
         // inflateFrom() method is in a companion object so it can be called without first creating a TaskItemViewHolder object
